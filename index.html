@@ -64,11 +64,22 @@
   <!-- Add your site or application content here -->
   <div id="container">
     <p>
+      <div id="catButtonClass">
+        <script>
+          function onCatButtonClick()
+          {
+            $("#catPicStyle").fadeOut("slow");
+            getRandomCatPicFor(catPic);
+          }
+        </script>
+        <button class="button" , onclick="onCatButtonClick()">Meow</button>
+      </div>
+      <br>
       <div id="catPicStyle">
         <img id="catPic" width="auto" height="auto" src="" />
       </div>
       <script>
-        function animationClick(element, animation, setInvisible)
+        function animationClick(element, animation)
         {
           element = $(element);
 
@@ -77,11 +88,7 @@
           window.setTimeout(function ()
           {
             element.removeClass('animated ' + animation);
-            if(setInvisible)
-            {
-              element.style = "display:none";
-            }
-          }, 1000);
+          }, 2000);
         }
 
         var catPic = document.getElementById("catPic");
@@ -89,23 +96,12 @@
         getRandomCatPicFor(catPic);
         catPic.onload = function ()
         {
-          catPic.style = "display:inline-block";
-            animationClick(document.getElementById("catPicStyle"), "fadeInRight");
+          $("#catPicStyle").fadeIn("fast");
+          //$(document.getElementById("catPicStyle")).removeClass('animated fadeOut')
+          //animationClick(document.getElementById("catPicStyle"), "fadeIn");
         }
       </script>
-      <br>
-      <br>
-      <div id="catButtonClass">
-        <script>
-          function onCatButtonClick()
-          {
-            getRandomCatPicFor(catPic);
-            animationClick(document.getElementById("catPicStyle"), "fadeOutLeft", true);
-          }
-        </script>
-        <button class="button" , onclick="onCatButtonClick()">Meow</button>
     </p>
-    </div>
   </div>
 
 

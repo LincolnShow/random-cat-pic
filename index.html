@@ -45,6 +45,7 @@
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animate.css">
 </head>
 
 <body>
@@ -62,30 +63,49 @@
 
   <!-- Add your site or application content here -->
   <div id="container">
-  <p>
-    <div id="catPicStyle">
-      <img id="catPic" width="auto" height="auto" src="" />
-    </div>
-    <script>
-      getRandomCatPicFor(document.getElementById("catPic"));
-      document.getElementById("catPic").onload = function()
-      {
-        document.getElementById("catPic").style = "opacity:1.0;filter:alpha(opacity=100)"
-      }
-    </script>
-    <br>
-    <br>
-    <div id="catButtonClass">
+    <p>
+      <div id="catPicStyle">
+        <img id="catPic" width="auto" height="auto" src="" />
+      </div>
       <script>
-        function onCatButtonClick()
+        function animationClick(element, animation, setInvisible)
         {
-          document.getElementById("catPic").style = "opacity:0.4;filter:alpha(opacity=40)";
-          getRandomCatPicFor(document.getElementById("catPic"));
+          element = $(element);
+
+          element.addClass('animated ' + animation);
+          //wait for animation to finish before removing classes
+          window.setTimeout(function ()
+          {
+            element.removeClass('animated ' + animation);
+            if(setInvisible)
+            {
+              element.style = "display:none";
+            }
+          }, 1000);
+        }
+
+        var catPic = document.getElementById("catPic");
+
+        getRandomCatPicFor(catPic);
+        catPic.onload = function ()
+        {
+          catPic.style = "display:inline-block";
+            animationClick(document.getElementById("catPicStyle"), "fadeInRight");
         }
       </script>
-      <button class="button" , onclick="onCatButtonClick()">Meow</button>
+      <br>
+      <br>
+      <div id="catButtonClass">
+        <script>
+          function onCatButtonClick()
+          {
+            getRandomCatPicFor(catPic);
+            animationClick(document.getElementById("catPicStyle"), "fadeOutLeft", true);
+          }
+        </script>
+        <button class="button" , onclick="onCatButtonClick()">Meow</button>
+    </p>
     </div>
-  </p>
   </div>
 
 

@@ -8,7 +8,6 @@ const IMAGES_SEARCH = '/images/search';
 
 function getRandomCatPicFor(img)
 {
-    img.style = "opacity:0.4;filter:alpha(opacity=40)";
     var result; 
     const http = new XMLHttpRequest(); 
     http.open("GET", apiUrl + IMAGES_SEARCH + "?", ASYNC_ENABLED); 
@@ -31,7 +30,6 @@ function getRandomCatPicFor(img)
 
         img.src = (picUrl + "?random" + new Date().getTime());
 
-        img.style = "opacity:1.0;filter:alpha(opacity=100)"
     }
 
     http.send();

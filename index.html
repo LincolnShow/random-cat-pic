@@ -12,12 +12,26 @@
     vertical-align: middle;
   }
 
-  #catButtonStyle {
+  #catButton {
     display: inline-block;
     vertical-align: middle;
   }
 
-  .button {
+  .small_button_style {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .small_button_style:hover {
+    background-color: green;
+  }
+
+  .medium_button_style {
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -27,7 +41,7 @@
     cursor: pointer;
   }
 
-  .button:hover {
+  .medium_button_style:hover {
     background-color: green;
   }
 </style>
@@ -64,7 +78,7 @@
   <!-- Add your site or application content here -->
   <div id="container">
     <p>
-      <div id="catButtonClass">
+      <div id="catButton">
         <script>
           function onCatButtonClick()
           {
@@ -72,8 +86,31 @@
             getRandomCatPicFor(catPic);
           }
         </script>
-        <button class="button" , onclick="onCatButtonClick()">Meow</button>
+        <button class="small_button_style", onclick="onCatButtonClick()">Meow</button>
       </div>
+
+      <div id="catButton">
+        <script>
+          function onCatButtonClick()
+          {
+            $("#catPicStyle").fadeOut("slow");
+            getRandomCatPicFor(catPic);
+          }
+        </script>
+        <button class="medium_button_style", onclick="onCatButtonClick()">Meow</button>
+      </div>
+
+      <div id="catButton">
+        <script>
+          function onCatButtonClick()
+          {
+            $("#catPicStyle").fadeOut("slow");
+            getRandomCatPicFor(catPic);
+          }
+        </script>
+        <button class="medium_button_style", onclick="onCatButtonClick()">Meow</button>
+      </div>
+      <br>
       <br>
       <div id="catPicStyle">
         <img id="catPic" width="auto" height="auto" src="" />

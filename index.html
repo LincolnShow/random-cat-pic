@@ -1,55 +1,10 @@
 <!doctype html>
 <html class="no-js" lang="">
 
-<style>
-  #container {
-    text-align: center;
-  }
-
-  #catPicStyle {
-    border: solid #000 1px;
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  #catButton {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
-  .small_button_style {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    text-align: center;
-    font-size: 12px;
-    cursor: pointer;
-  }
-
-  .small_button_style:hover {
-    background-color: green;
-  }
-
-  .medium_button_style {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 25px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .medium_button_style:hover {
-    background-color: green;
-  }
-</style>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title></title>
+  <title>Fancy stuff</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -61,6 +16,100 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/animate.css">
 </head>
+
+<style>
+  #container {
+    text-align: center;
+  }
+
+  #rolling-cats-container {
+    display: inline-block;
+    zoom: 0.1;
+    -moz-transform: scale(0.1);
+  }
+
+  #cat_pic_css {
+    border: solid #000 1px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  #container_element {
+    display: inline-block;
+    border: solid #000 1px;
+  }
+
+  .static_button_css {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90px;
+    max-width: 90px;
+  }
+
+  .static_button_css:hover {
+    background-color: rgb(67, 155, 70);
+  }
+
+  .both_button_css {
+    /*background-color: #4CAF50;*/
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90px;
+    max-width: 90px;
+
+    background: #4caf50;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #4caf50 0%, #fc59d9 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #4caf50 0%, #fc59d9 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #4caf50 0%, #fc59d9 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4caf50', endColorstr='#fc59d9', GradientType=1);
+    /* IE6-9 */
+  }
+
+  .both_button_css:hover {
+    /*background-color: green;*/
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#449e47+0,fb39d1+100 */
+    background: #449e47;
+    /* Old browsers */
+    background: -moz-linear-gradient(left, #449e47 0%, #fb39d1 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #449e47 0%, #fb39d1 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #449e47 0%, #fb39d1 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#449e47', endColorstr='#fb39d1', GradientType=1);
+    /* IE6-9 */
+  }
+
+  .gif_button_css {
+    background-color: #fc59d9;
+    border: none;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    width: 90px;
+    max-width: 90px;
+  }
+
+  .gif_button_css:hover {
+    background-color: rgb(214, 82, 186);
+  }
+</style>
+
 
 <body>
   <!--[if lte IE 9]>
@@ -77,72 +126,90 @@
 
   <!-- Add your site or application content here -->
   <div id="container">
-    <p>
-      <div id="catButton">
-        <script>
-          function onCatButtonClick()
-          {
-            $("#catPicStyle").fadeOut("slow");
-            getRandomCatPicFor(catPic);
-          }
-        </script>
-        <button class="small_button_style", onclick="onCatButtonClick()">Meow</button>
-      </div>
-
-      <div id="catButton">
-        <script>
-          function onCatButtonClick()
-          {
-            $("#catPicStyle").fadeOut("slow");
-            getRandomCatPicFor(catPic);
-          }
-        </script>
-        <button class="medium_button_style", onclick="onCatButtonClick()">Meow</button>
-      </div>
-
-      <div id="catButton">
-        <script>
-          function onCatButtonClick()
-          {
-            $("#catPicStyle").fadeOut("slow");
-            getRandomCatPicFor(catPic);
-          }
-        </script>
-        <button class="medium_button_style", onclick="onCatButtonClick()">Meow</button>
-      </div>
-      <br>
-      <br>
-      <div id="catPicStyle">
-        <img id="catPic" width="auto" height="auto" src="" />
-      </div>
+    <br>
+    <img id="cat1" src="./img/cat1.gif" width="100%">
+    <div id="container_element">
       <script>
-        function animationClick(element, animation)
+        function onStaticCatButtonClick()
         {
-          element = $(element);
-
-          element.addClass('animated ' + animation);
-          //wait for animation to finish before removing classes
-          window.setTimeout(function ()
-          {
-            element.removeClass('animated ' + animation);
-          }, 2000);
-        }
-
-        var catPic = document.getElementById("catPic");
-
-        getRandomCatPicFor(catPic);
-        catPic.onload = function ()
-        {
-          $("#catPicStyle").fadeIn("fast");
-          //$(document.getElementById("catPicStyle")).removeClass('animated fadeOut')
-          //animationClick(document.getElementById("catPicStyle"), "fadeIn");
+          $("#cat_pic_css").fadeOut("slow");
+          getRandomCatPicFor(catPic, "medium", false, true);
         }
       </script>
-    </p>
+      <button class="static_button_css" , onclick="onStaticCatButtonClick()">₍⸍⸌̣ʷ̣̫⸍̣⸌₎</button>
+    </div>
+
+    <div id="container_element">
+      <script>
+        function onBothCatButtonClick()
+        {
+          $("#cat_pic_css").fadeOut("slow");
+          getRandomCatPicFor(catPic, "medium", true, true);
+        }
+      </script>
+      <button class="both_button_css" , onclick="onBothCatButtonClick()">₍⸍⸌̣ʷ̣̫⸍̣⸌₎ค</button>
+    </div>
+
+    <div id="container_element">
+      <script>
+        function onGifCatButtonClick()
+        {
+          $("#cat_pic_css").fadeOut("slow");
+          getRandomCatPicFor(catPic, "medium", true, false);
+        }
+      </script>
+      <button class="gif_button_css" , onclick="onGifCatButtonClick()">ก₍⸍⸌̣ʷ̣̫⸍̣⸌₎ค</button>
+    </div>
+    <img id="cat2" src="./img/cat2.gif" width="100%"/>
+    <br>
+    <br>
+    <img id="cat3" src="./img/cat5.gif" width="100%" />
+    <img id="cat4" src="./img/cat4.gif" width="120%" />
+    <img id="cat5" src="./img/cat5.gif" width="100%" style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"/>
+    <br>
+    <br>
+    <div id="cat_pic_css">
+      <img id="catPic" width="100%" height="100%" src="" />
+    </div>
+    <script>
+      function animationClick(element, animation)
+      {
+        element = $(element);
+
+        element.addClass('animated ' + animation);
+        //wait for animation to finish before removing classes
+        window.setTimeout(function ()
+        {
+          element.removeClass('animated ' + animation);
+        }, 2000);
+      }
+
+      var catPic = document.getElementById("catPic");
+
+      $("#cat_pic_css").hide();
+      //getRandomCatPicFor(catPic, "medium");
+
+      catPic.onload = function ()
+      {
+        $("#cat_pic_css").fadeIn("fast");
+        //$(document.getElementById("cat_pic_css")).removeClass('animated fadeOut')
+        //animationClick(document.getElementById("cat_pic_css"), "fadeIn");
+      }
+    </script>
   </div>
 
 
 
+  <script>
+    var catsCount = 5;
+    for(i = 1; i <= catsCount; ++i)
+    {
+      $("#cat" + i).width($("#cat" + i).width() * 0.04);
+    }
+    //$("#cat1").width($("#cat1").width() * 0.04);
+    //$("#cat2").width($("#cat2").width() * 0.04);
+    //$("#cat3").width($("#cat3").width() * 0.04);
+  </script>
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;

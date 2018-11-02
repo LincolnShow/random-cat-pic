@@ -18,6 +18,8 @@
 </head>
 
 <style>
+  #flyingImageContainer {}
+
   #container {
     text-align: center;
   }
@@ -36,80 +38,58 @@
 
   #container_element {
     display: inline-block;
-    border: solid #000 1px;
+    /*border: solid #000 1px;*/
+  }
+
+  .button_css {
+    /*background: transparent;*/
+    color: white;
+    padding: 1px 1px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .button_css:hover {
+    filter: brightness(90%);
+  }
+
+  .button_css:active {
+    filter: brightness(60%);
   }
 
   .static_button_css {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    width: 90px;
-    max-width: 90px;
+    background-color: pink;
+    border: lightpink 5px;
+    border-style: outset;
   }
 
   .static_button_css:hover {
-    background-color: rgb(67, 155, 70);
+    background-color: palevioletred;
   }
 
   .both_button_css {
-    /*background-color: #4CAF50;*/
-    border: none;
-    color: white;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    width: 90px;
-    max-width: 90px;
-
-    background: #4caf50;
-    /* Old browsers */
-    background: -moz-linear-gradient(left, #4caf50 0%, #fc59d9 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #4caf50 0%, #fc59d9 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #4caf50 0%, #fc59d9 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4caf50', endColorstr='#fc59d9', GradientType=1);
-    /* IE6-9 */
+    background-color: pink;
+    border: lightpink 5px;
+    border-style: outset;
   }
 
   .both_button_css:hover {
-    /*background-color: green;*/
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#449e47+0,fb39d1+100 */
-    background: #449e47;
-    /* Old browsers */
-    background: -moz-linear-gradient(left, #449e47 0%, #fb39d1 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #449e47 0%, #fb39d1 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #449e47 0%, #fb39d1 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#449e47', endColorstr='#fb39d1', GradientType=1);
-    /* IE6-9 */
+    background-color: palevioletred;
   }
 
   .gif_button_css {
-    background-color: #fc59d9;
-    border: none;
-    color: white;
-    padding: 15px 15px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    width: 90px;
-    max-width: 90px;
+    background-color: pink;
+    border: lightpink 5px;
+    border-style: outset;
   }
 
   .gif_button_css:hover {
-    background-color: rgb(214, 82, 186);
+    background-color: palevioletred;
   }
 </style>
-
 
 <body>
   <!--[if lte IE 9]>
@@ -125,9 +105,188 @@
   <script src="js/main.js"></script>
 
   <!-- Add your site or application content here -->
+  <script>
+    var img_index = 1;
+
+    function fly(imgPath, startAt = "left", xPos = 0, yPos = 0, duration = 5000, reverse = false, scale = 100.0)
+    {
+      var img = $('<img />').attr({
+        'id': 'myImage' + img_index,
+        'src': imgPath,
+        'width': "100%"
+      }).appendTo('#flyingImageContainer');
+
+      $("#myImage" + img_index).width($("#myImage" + img_index).width() * scale);
+
+      var height = img.get(0).height;
+      var width = img.get(0).width;
+      var screenWidth = $(window).width();
+      var screenHeight = $(window).height();
+
+      function animateF()
+      {
+        var styles = {};
+        styles['position'] = 'absolute';
+        if (startAt == "left" || startAt == "right")
+        {
+          styles['bottom'] = yPos;
+        }
+        else
+        {
+          styles['left'] = xPos;
+        }
+        styles['overflow'] = "hidden";
+        styles[startAt] = (startAt == "left" || startAt == "right" ? -width + xPos : -height + yPos) - 100;
+
+        if (reverse)
+        {
+          // -webkit-transform: scaleX(-1); transform: scaleX(-1);
+          styles['-webkit-transform'] = "scaleX(-1)";
+          styles['transform'] = "scaleX(-1)";
+        }
+
+        var animateStyles = {};
+        animateStyles[startAt] = (startAt == "left" || startAt == "right" ? screenWidth : screenHeight + height) + 500;
+        img.css(styles).animate(animateStyles, duration, function ()
+        {
+          img.remove();
+        });
+      }
+
+      animateF();
+
+      ++img_index;
+    }
+
+    $(document).ready(function ()
+    {
+      var img_index = 1;
+
+      console.log("screen_width=" + $(window).width());
+      console.log("screen_height=" + $(window).height());
+
+      function getRandomArbitrary(min, max)
+      {
+        ++max;
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+
+      function getRandomPosX(elementWidth = 0)
+      {
+        var x = $(window).width();
+        var result = Math.floor(Math.random() * x);
+        if ((result + elementWidth) > x)
+        {
+          result = x - elementWidth;
+        }
+        return result;
+      }
+
+      function getRandomPosY(elementHeight = 0)
+      {
+        var y = $(window).height();
+        var result = Math.floor(Math.random() * y);
+        if ((result + elementHeight) > y)
+        {
+          result = y - elementHeight;
+        }
+        return result;
+      }
+
+      function miceChaserAnim()
+      {
+        var miceCount = getRandomArbitrary(1, 10);
+        var maxDuration = 0;
+        var minX = 0;
+        var side = getRandomArbitrary(0, 1) == 0 ? "left" : "right";
+        for (var i = 0; i < miceCount; ++i)
+        {
+          var x = -getRandomPosX();
+          var duration = getRandomArbitrary(5000, 6000);
+
+          if (x < minX)
+          {
+            minX = x;
+          }
+          if (duration > maxDuration)
+          {
+            maxDuration = duration;
+          }
+
+          fly("img/mouse1.gif", side, x, 0, duration, side == "left" ? false : true, 0.04);
+        }
+
+        fly("img/cat9.gif", side, getRandomArbitrary(minX - 500, minX), 0, getRandomArbitrary(maxDuration, maxDuration + 500), side == "left" ? false : true, 0.04);
+      }
+
+      function flyingMiceAnim()
+      {
+        var miceCount = getRandomArbitrary(1, 50);
+        for (var i = 0; i < miceCount; ++i)
+        {
+          var x = getRandomPosX();
+          var y = -getRandomPosY();
+          var duration = getRandomArbitrary(2000, 4000);
+
+          fly("img/mouse2.gif", "bottom", x, y, duration, getRandomArbitrary(0, 1) == 0 ? false : true, 0.04);
+        }
+      }
+
+      function flyingCatsAnim()
+      {
+        var catsCount = getRandomArbitrary(3, 10);
+        for (var i = 0; i < catsCount; ++i)
+        {
+          var x = -getRandomPosX();
+          var y = getRandomPosY();
+          var duration = getRandomArbitrary(4000, 6000);
+          var side = getRandomArbitrary(0, 1) == 0 ? "left" : "right";
+          fly("img/cat8.gif", side, x, y, duration, side == "left" ? false : true, 0.04);
+        }
+      }
+
+      function squidWardAnim()
+      {
+        var side = getRandomArbitrary(0, 1) == 0 ? "left" : "right";
+        var x = -getRandomPosX();
+        var y = getRandomPosY() - 100;
+        if(y < 0)
+        {
+          y = 0;
+        }
+        var duration = getRandomArbitrary(8000, 10000);
+        fly("img/squidward.gif", side, x, y, duration, side == "left" ? false : true, 0.15);
+      }
+
+      $('#button1, #button2, #button3').click(function ()
+      {
+        var anim = getRandomArbitrary(1, 4);
+        if (anim == 1)
+        {
+          miceChaserAnim();
+        }
+        else if (anim == 2)
+        {
+          flyingCatsAnim();
+        }
+        else if (anim == 3)
+        {
+          flyingMiceAnim();
+        }
+        else if (anim == 4)
+        {
+          squidWardAnim();
+        }
+      });
+
+
+    });
+  </script>
+  <div id="flyingImageContainer">
+  </div>
   <div id="container">
     <br>
-    <img id="cat1" src="./img/cat1.gif" width="100%">
+    <img id="cat1" src="./img/cat1.gif" width="100%" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div id="container_element">
       <script>
         function onStaticCatButtonClick()
@@ -136,7 +295,7 @@
           getRandomCatPicFor(catPic, "medium", false, true);
         }
       </script>
-      <button class="static_button_css" , onclick="onStaticCatButtonClick()">₍⸍⸌̣ʷ̣̫⸍̣⸌₎</button>
+      <img id="button1" class="button_css static_button_css" onclick="onStaticCatButtonClick()" src="./img/cat6.png" />
     </div>
 
     <div id="container_element">
@@ -147,7 +306,7 @@
           getRandomCatPicFor(catPic, "medium", true, true);
         }
       </script>
-      <button class="both_button_css" , onclick="onBothCatButtonClick()">₍⸍⸌̣ʷ̣̫⸍̣⸌₎ค</button>
+      <img id="button2" class="button_css both_button_css" onclick="onBothCatButtonClick()" src="./img/cat7.png" />
     </div>
 
     <div id="container_element">
@@ -158,14 +317,16 @@
           getRandomCatPicFor(catPic, "medium", true, false);
         }
       </script>
-      <button class="gif_button_css" , onclick="onGifCatButtonClick()">ก₍⸍⸌̣ʷ̣̫⸍̣⸌₎ค</button>
+      <img id="button3" class="button_css gif_button_css" onclick="onGifCatButtonClick()" src="./img/cat8.png" />
     </div>
-    <img id="cat2" src="./img/cat2.gif" width="100%"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img id="cat2" src="./img/cat2.gif" width="100%" />
+    <br>
     <br>
     <br>
     <img id="cat3" src="./img/cat5.gif" width="100%" />
     <img id="cat4" src="./img/cat4.gif" width="120%" />
-    <img id="cat5" src="./img/cat5.gif" width="100%" style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"/>
+    <img id="cat5" src="./img/cat5.gif" width="100%" style="-webkit-transform: scaleX(-1); transform: scaleX(-1);" />
     <br>
     <br>
     <div id="cat_pic_css">
@@ -187,7 +348,7 @@
       var catPic = document.getElementById("catPic");
 
       $("#cat_pic_css").hide();
-      //getRandomCatPicFor(catPic, "medium");
+      getRandomCatPicFor(catPic);
 
       catPic.onload = function ()
       {
@@ -202,10 +363,13 @@
 
   <script>
     var catsCount = 5;
-    for(i = 1; i <= catsCount; ++i)
+    for (i = 1; i <= catsCount; ++i)
     {
       $("#cat" + i).width($("#cat" + i).width() * 0.04);
     }
+
+    //$("#button" + i).width($("#button" + i).width() * 0.01);
+    //$("#button" + i + "img").width($("#button" + i + "img").width() * 0.01);
     //$("#cat1").width($("#cat1").width() * 0.04);
     //$("#cat2").width($("#cat2").width() * 0.04);
     //$("#cat3").width($("#cat3").width() * 0.04);
